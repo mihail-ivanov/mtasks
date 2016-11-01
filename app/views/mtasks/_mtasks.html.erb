@@ -1,0 +1,44 @@
+
+<div class="autoscroll">
+  <table class="list issues">
+    <thead>
+      <caption><%= caption %></caption>
+      <tr>
+        <th>Due date</th>
+        <th>Task</th>
+        <th>Author</th>
+        <th>Assigned to</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% mtasks.each do |mtask| %>
+        <tr id="mtask-<%= mtask.id %>" class="hascontextmenu <%= cycle('odd', 'even') %>">
+          <td><%= mtask.due_date %></td>
+          <td><%= mtask.text %></td>
+          <td>
+            <% if mtask.author.present? %>
+              <%= mtask.author.name %>
+            <% end %>
+          </td>
+          <td>
+            <% if mtask.assigned_to.present?   %>
+              <%= mtask.assigned_to.name %>
+            <% end %>
+          </td>
+          <td>
+            <% if mtask.finished %>
+              <%= form_for :mtask, url: restore_mtask_path(mtask, project_id: @project.identifier) do |f| %>
+                <%= submit_tag 'Restore' %>
+              <% end %>
+            <% else %>
+              <%= form_for :mtask, url: finish_mtask_path(mtask, project_id: @project.identifier) do |f| %>
+                <%= submit_tag 'Finish' %>
+              <% end %>
+            <% end %>
+          </td>
+      </tr>
+      <%end %>
+    </tbody>
+  </table>
+</div>

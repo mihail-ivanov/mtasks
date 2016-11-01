@@ -1,0 +1,14 @@
+<%= error_messages_for 'mtask' %>
+
+<div class="box tabular">
+  <p>
+    <label for="text">Task description</label>
+    <%= f.text_field :text %>
+  </p>
+
+  <p id="due_date_area">
+    <label for="due_date">Due date</label>
+    <%= f.date_field(:due_date, :size => 10, required: false) %>
+    <%= calendar_for('issue_due_date') %>
+  </p>
+</div>

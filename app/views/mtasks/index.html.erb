@@ -1,0 +1,8 @@
+
+<%= form_for @mtask, url: mtasks_path(project_id: @project.identifier) do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f} %>
+  <%= submit_tag l(:button_save) %>
+<% end %>
+
+<%= render partial: 'mtasks', locals: {mtasks: @new_tasks, caption: 'New tasks'} %>
+<%= render partial: 'mtasks', locals: {mtasks: @finished_tasks, caption: 'Finished tasks'} %>
